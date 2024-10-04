@@ -35,7 +35,7 @@ module.exports = {
     bsc_testnet: {
       provider: () => {
         return new HDWalletProvider(
-          `uphold wide shed another couch focus hidden soup lazy top salon salute`, //mnemonic
+          `poet ladder wish retire glue ozone danger slow border stuff south wash`, //mnemonic
           `https://data-seed-prebsc-1-s1.binance.org:8545`, //endpoint
           0, 20
         );
@@ -60,7 +60,7 @@ module.exports = {
       provider: () => {
         return new HDWalletProvider(
           ``, //mnemonic
-          `https://bsc-dataseed.binance.org`, //endpoint
+          `https://bsc-dataseed1.binance.org/`, //endpoint
            0, 20
         );
       },
