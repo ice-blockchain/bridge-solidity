@@ -1,12 +1,12 @@
-const TON_WORKCHAIN = -1;
-const TON_ADDRESS_HASH = '0x2175818712088C0A5F087DF2594A41CB5CB29689EB60FC59F6848D752AF11498';
-const TON_TX_HASH = '0x6C79A5432D988FFAD699E60C4A6E9C7E191CBE5A1BD199294C1F3361D0893359';
-const TON_TX_LT = 19459352000003;
+const ION_WORKCHAIN = -1;
+const ION_ADDRESS_HASH = '0x2175818712088C0A5F087DF2594A41CB5CB29689EB60FC59F6848D752AF11498';
+const ION_TX_HASH = '0x6C79A5432D988FFAD699E60C4A6E9C7E191CBE5A1BD199294C1F3361D0893359';
+const ION_TX_LT = 19459352000003;
 
 let prepareSwapData = function(receiver, amount,
-                               tonaddress={workchain:TON_WORKCHAIN, address_hash:TON_ADDRESS_HASH},
-                               tx_hash=TON_TX_HASH, lt=TON_TX_LT) {
-    if (lt == TON_TX_LT) {
+                               tonaddress={workchain:ION_WORKCHAIN, address_hash:ION_ADDRESS_HASH},
+                               tx_hash=ION_TX_HASH, lt=ION_TX_LT) {
+    if (lt == ION_TX_LT) {
       lt = lt + Math.ceil(Date.now() / 1000)+Math.ceil(10000*Math.random());
     }
     return {
@@ -37,8 +37,7 @@ let hashData = function(encoded) {
 }
 let signHash = async function(hash, account) {
     let signature =  await web3.eth.sign(hash, account);
-    // Fix `v`(ganache returns 0 or 1, while other signers 27 or 28);
-    signature = signature.slice(0, 2+2*64)+(parseInt(signature.slice(130),16)+27).toString(16);
+    signature = signature.slice(0, 2+2*64)+(parseInt(signature.slice(130),16)).toString(16);
     return {
         signer: account,
         signature: signature
@@ -55,10 +54,10 @@ let signBurnStatus = async function(burnStatus, nonce, account, target) {
 };
 
 module.exports = Object({
-    TON_WORKCHAIN:TON_WORKCHAIN,
-    TON_ADDRESS_HASH:TON_ADDRESS_HASH,
-    TON_TX_HASH:TON_TX_HASH,
-    TON_TX_LT:TON_TX_LT,
+    ION_WORKCHAIN:ION_WORKCHAIN,
+    ION_ADDRESS_HASH:ION_ADDRESS_HASH,
+    ION_TX_HASH:ION_TX_HASH,
+    ION_TX_LT:ION_TX_LT,
     prepareSwapData:prepareSwapData,
     encodeSwapData:encodeSwapData,
     encodeSet:encodeSet,

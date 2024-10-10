@@ -12,7 +12,7 @@ let sigchecker;
 
 contract("SignatureChecker", ([oracle, not_oracle]) => {
   describe("SignatureChecker::instance", async () => {
-    sigchecker = await Bridge.deployed("Wrapped TON Coin", "TONCOIN", [oracle]);
+    sigchecker = await Bridge.deployed("Ion", "ION", [oracle]);
   });
   describe("SignatureChecker::checks",  () => {
 

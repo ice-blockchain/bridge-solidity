@@ -11,10 +11,10 @@ let bridge;
 contract("Bridge", ([oracle1, not_oracle, oracle2, oracle3, oracle4, oracle5]) => {
   describe("Bridge::instance", () => {
     it("", async() => {
-      bridge = await Bridge.new("Wrapped TON Coin", "TONCOIN", [oracle1, oracle2, oracle3]);
+      bridge = await Bridge.new("Ion", "ION", [oracle1, oracle2, oracle3]);
     });
   });
-  describe("WrappedTON::minting", () => {
+  describe("WrappedION::minting", () => {
    it("one random address can't mint tokens", async () => {
       let user = oracle5;
       let data = utils.prepareSwapData(user, 1e9);
@@ -66,7 +66,7 @@ contract("Bridge", ([oracle1, not_oracle, oracle2, oracle3, oracle4, oracle5]) =
 
   });
 
-  describe("WrappedTON::oracles_rotation", () => {
+  describe("WrappedION::oracles_rotation", () => {
     it("check initial oracles", async () => {
       // list
       let _oracle1 = await bridge.oraclesSet(0);
@@ -122,7 +122,7 @@ contract("Bridge", ([oracle1, not_oracle, oracle2, oracle3, oracle4, oracle5]) =
       isOracle.should.be.false;
     });
   });
-  describe("WrappedTON::burn control", () => {
+  describe("WrappedION::burn control", () => {
     it("stop burning", async () => {
       let isBurnAllowed = await bridge.allowBurn();
       isBurnAllowed.should.be.false;
@@ -139,26 +139,26 @@ contract("Bridge", ([oracle1, not_oracle, oracle2, oracle3, oracle4, oracle5]) =
       let signatureSet = [await utils.signBurnStatus(1, 13, oracle4, bridge.address),
                           await utils.signBurnStatus(1, 13, oracle5, bridge.address)];
       await bridge.voteForSwitchBurn(1, 13, signatureSet, { from: oracle1 }).should.be.fulfilled;
-      await bridge.burn("1", {workchain: utils.TON_WORKCHAIN, address_hash: utils.TON_ADDRESS_HASH}, { from: user }).should.be.fulfilled;
+      await bridge.burn("1", {workchain: utils.ION_WORKCHAIN, address_hash: utils.ION_ADDRESS_HASH}, { from: user }).should.be.fulfilled;
     });
     it("check replay protection", async () => {
       let user = oracle5;
       let signatureSet = [await utils.signBurnStatus(0, 12, oracle4, bridge.address),
                           await utils.signBurnStatus(0, 12, oracle5, bridge.address)];
       await bridge.voteForSwitchBurn(0, 12, signatureSet, { from: oracle1 }).should.be.fulfilled;
-      await bridge.burn("1", {workchain: utils.TON_WORKCHAIN, address_hash: utils.TON_ADDRESS_HASH}, { from: user }).should.be.rejected;
+      await bridge.burn("1", {workchain: utils.ION_WORKCHAIN, address_hash: utils.ION_ADDRESS_HASH}, { from: user }).should.be.rejected;
 
       signatureSet = [await utils.signBurnStatus(1, 14, oracle4, bridge.address),
                           await utils.signBurnStatus(1, 14, oracle5, bridge.address)];
       await bridge.voteForSwitchBurn(1, 14, signatureSet, { from: oracle1 }).should.be.fulfilled;
-      await bridge.burn("1", {workchain: utils.TON_WORKCHAIN, address_hash: utils.TON_ADDRESS_HASH}, { from: user }).should.be.fulfilled;
+      await bridge.burn("1", {workchain: utils.ION_WORKCHAIN, address_hash: utils.ION_ADDRESS_HASH}, { from: user }).should.be.fulfilled;
 
       signatureSet = [await utils.signBurnStatus(0, 12, oracle4, bridge.address),
                           await utils.signBurnStatus(0, 12, oracle5, bridge.address)];
       await bridge.voteForSwitchBurn(0, 12, signatureSet, { from: oracle1 }).should.be.rejected;
       let isBurnAllowed = await bridge.allowBurn();
       isBurnAllowed.should.be.true;
-      await bridge.burn("1", {workchain: utils.TON_WORKCHAIN, address_hash: utils.TON_ADDRESS_HASH}, { from: user }).should.be.fulfilled;
+      await bridge.burn("1", {workchain: utils.ION_WORKCHAIN, address_hash: utils.ION_ADDRESS_HASH}, { from: user }).should.be.fulfilled;
     });
 
   });

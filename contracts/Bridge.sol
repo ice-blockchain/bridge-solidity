@@ -4,10 +4,10 @@ pragma experimental ABIEncoderV2;
 
 import "./BridgeInterface.sol";
 import "./SignatureChecker.sol";
-import "./WrappedTON.sol";
+import "./WrappedION.sol";
 
 
-contract Bridge is SignatureChecker, BridgeInterface, WrappedTON {
+contract Bridge is SignatureChecker, BridgeInterface, WrappedION {
     address[] public oraclesSet;
     mapping(address => bool) public isOracle;
     mapping(bytes32 => bool) public finishedVotings;

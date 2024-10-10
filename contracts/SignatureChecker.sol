@@ -2,9 +2,9 @@
 pragma solidity ^0.7.0;
 pragma experimental ABIEncoderV2;
 
-import "./TonUtils.sol";
+import "./IonUtils.sol";
 
-contract SignatureChecker is TonUtils {
+contract SignatureChecker is IonUtils {
 
     function checkSignature(bytes32 digest, Signature memory sig) public pure {
           if (sig.signature.length != 65) {
