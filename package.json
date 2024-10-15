@@ -8,7 +8,8 @@
     "deploy": "truffle migrate --reset --network development",
     "deployTestnet": "truffle migrate --network testnet",
     "deployMainnet": "truffle migrate --network mainnet",
-    "ganache": "ganache-cli -i 666 -p 8545 -m 'uphold wide shed another couch focus hidden soup lazy top salon salute'"
+    "ganache": "ganache-cli -i 666 -p 8545 -m 'uphold wide shed another couch focus hidden soup lazy top salon salute'",
+    "flatten": "hardhat flatten ./contracts/Bridge.sol > ./artifacts/contracts/Bridge.sol/Bridge.flattened.sol"
   },
   "repository": {
     "type": "git",
