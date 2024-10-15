@@ -33,9 +33,11 @@
     "web3": "^4.13.0"
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "chai": "^4.3.4",
     "dotenv": "^8.2.0",
     "eth-gas-reporter": "^0.2.25",
+    "hardhat": "^2.22.13",
     "truffle": "^5.8.2"
   }
 }
