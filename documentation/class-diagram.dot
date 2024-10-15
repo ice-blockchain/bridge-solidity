@@ -1,0 +1,28 @@
+digraph G {
+    graph [rankdir=BT];
+
+    node [shape=record];
+
+    IERC20 [label="{IERC20|+ totalSupply() : uint256\l+ balanceOf(account) : uint256\l...}"];
+    ERC20 [label="{ERC20|- _balances: mapping\l- _allowances: mapping\l- _totalSupply: uint256\l- _name: string\l- _symbol: string\l|+ name() : string\l+ symbol() : string\l+ decimals() : uint8\l+ totalSupply() : uint256\l+ balanceOf(account) : uint256\l+ transfer(recipient, amount) : bool\l+ allowance(owner, spender) : uint256\l+ approve(spender, amount) : bool\l+ transferFrom(sender, recipient, amount) : bool\l...}"];
+
+    IonUtils [label="{IonUtils|+ IonAddress\l+ IonTxID\l+ SwapData\l+ Signature\l}"];
+
+    WrappedION [label="{WrappedION|+ allowBurn : bool\l|+ mint(sd : SwapData) : internal\l+ burn(amount : uint256, addr : IonAddress) : external\l+ burnFrom(account : address, amount : uint256, addr : IonAddress) : external\l+ decimals() : uint8\l}"];
+
+    SignatureChecker [label="{SignatureChecker|+ checkSignature(digest : bytes32, sig : Signature) : public\l+ getSwapDataId(data : SwapData) : public\l+ getNewSetId(oracleSetHash : int, set : address[]) : public\l+ getNewBurnStatusId(newBurnStatus : bool, nonce : int) : public\l}"];
+
+    BridgeInterface [label="{BridgeInterface|+ voteForMinting(data : SwapData, signatures : Signature[]) : external\l+ voteForNewOracleSet(oracleSetHash : int, newOracles : address[], signatures : Signature[]) : external\l+ voteForSwitchBurn(newBurnStatus : bool, nonce : int, signatures : Signature[]) : external\l}"];
+
+    Bridge [label="{Bridge|+ oraclesSet : address[]\l+ isOracle : mapping\l+ finishedVotings : mapping\l|+ constructor(name : string, symbol : string, initialSet : address[])\l- generalVote(digest : bytes32, signatures : Signature[]) : internal\l+ voteForMinting(data : SwapData, signatures : Signature[]) : public\l+ voteForNewOracleSet(oracleSetHash : int, newOracles : address[], signatures : Signature[]) : public\l+ voteForSwitchBurn(newBurnStatus : bool, nonce : int, signatures : Signature[]) : public\l- executeMinting(data : SwapData) : internal\l- updateOracleSet(oracleSetHash : int, newSet : address[]) : internal\l+ getFullOracleSet() : public\l}"];
+
+    // Inheritance relationships
+  ERC20 -> IERC20 [arrowhead="empty", style="solid"];
+    WrappedION -> ERC20 [arrowhead="empty", style="solid"];
+    WrappedION -> IonUtils [arrowhead="empty", style="solid"];
+    SignatureChecker -> IonUtils [arrowhead="empty", style="solid"];
+    BridgeInterface -> IonUtils [arrowhead="empty", style="solid"];
+    Bridge -> WrappedION [arrowhead="empty", style="solid"];
+    Bridge -> SignatureChecker [arrowhead="empty", style="solid"];
+    Bridge -> BridgeInterface [arrowhead="empty", style="solid"];
+}
