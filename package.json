@@ -9,7 +9,8 @@
     "deployTestnet": "truffle migrate --network testnet",
     "deployMainnet": "truffle migrate --network mainnet",
     "ganache": "ganache-cli -i 666 -p 8545 -m 'uphold wide shed another couch focus hidden soup lazy top salon salute'",
-    "flatten": "hardhat flatten ./contracts/Bridge.sol > ./artifacts/contracts/Bridge.sol/Bridge.flattened.sol"
+    "flatten-bridge": "hardhat flatten ./contracts/Bridge.sol > ./artifacts/contracts/Bridge.sol/Bridge.flattened.sol",
+    "flatten-bridge-debugger": "hardhat flatten ./contracts/BridgeDebugger.sol > ./artifacts/contracts/BridgeDebugger.sol/BridgeDebugger.flattened.sol"
   },
   "repository": {
     "type": "git",
