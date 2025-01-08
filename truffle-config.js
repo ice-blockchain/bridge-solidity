@@ -65,8 +65,8 @@ module.exports = {
         );
       },
       network_id: "56",
-      gasPrice: 25e9,
-      gas: 6721975,
+      gasPrice: 2e9,
+      gas: 4000000,
     }
   },
   mocha: {
