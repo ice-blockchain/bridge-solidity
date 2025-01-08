@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "chai": "^4.3.4",
-    "dotenv": "^8.2.0",
+    "dotenv": "^8.6.0",
     "eth-gas-reporter": "^0.2.25",
     "truffle": "^5.8.2"
   }
