@@ -4,9 +4,9 @@ pragma experimental ABIEncoderV2;
 
 import "./ERC20.sol";
 import "./IonUtils.sol";
+import "./Ownable.sol";
 
-
-abstract contract WrappedION is ERC20, IonUtils {
+abstract contract WrappedION is ERC20, IonUtils, Ownable {
     bool public allowBurn;
 
     function mint(SwapData memory sd) internal {
@@ -49,6 +49,16 @@ abstract contract WrappedION is ERC20, IonUtils {
         return 9;
     }
 
+    function changeName(string memory newName) public onlyOwner {
+        _name = newName;
+        emit NameChanged(newName, msg.sender);
+    }
+
+    function changeSymbol(string memory newSymbol) public onlyOwner {
+        _symbol = newSymbol;
+        emit SymbolChanged(newSymbol, msg.sender);
+    }
+
     event SwapEthToIon(
         address indexed from, // sender user EVM-network
         int8 to_wc, // workchain of receiver user in ION-network
@@ -62,5 +72,15 @@ abstract contract WrappedION is ERC20, IonUtils {
         uint64 lt, // transaction LT (logical time) on ION bridge smart contract
         address indexed to, // user's EVM-address to receive wrapped IONs
         uint256 value // nanoions amount to receive in EVM-network
+    );
+
+    event NameChanged(
+        string indexed newName,
+        address indexed owner
+    );
+
+    event SymbolChanged(
+        string indexed newSymbol,
+        address indexed owner
     );
 }
