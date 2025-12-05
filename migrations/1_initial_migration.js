@@ -2,12 +2,12 @@ const Bridge = artifacts.require("Bridge");
 
 module.exports = async function (deployer, network, accounts) {
   if (network === "development") {
-    await deployer.deploy(Bridge, "ION Chain", "ION", [accounts[0]]);
+    await deployer.deploy(Bridge, "Ice Open Network", "ION", [accounts[0]]);
   }
 
  if (network === "bsc_mainnet") {
    console.log('Deploy from ' + accounts[0]);
-   await deployer.deploy(Bridge, "ION Chain", "ION",
+   await deployer.deploy(Bridge, "Ice Open Network", "ION",
                          ['0xd9fef78c18e3a0a6dda47008f2ba447d1c74af9a',
                           '0xa73c1686aa860747e6b06b1e5f86af63c9fa4646',
                           '0x6d1f779093c38307b156da4dd9e4f48994fe3c3f',
