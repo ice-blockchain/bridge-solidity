@@ -4,10 +4,12 @@ pragma experimental ABIEncoderV2;
 
 import "./ERC20.sol";
 import "./IonUtils.sol";
-import "./Ownable.sol";
 
-abstract contract WrappedION is ERC20, IonUtils, Ownable {
+abstract contract WrappedION is ERC20, IonUtils {
     bool public allowBurn;
+
+    address public constant multisig = 0xDFDe8108E14c70B6796bdd220454A80E849C7689;
+    string public constant ERROR_NOT_ALLOWED = "Caller isn't the expected multisig address";
 
     function mint(SwapData memory sd) internal {
       _mint(sd.receiver, sd.amount);
@@ -49,12 +51,14 @@ abstract contract WrappedION is ERC20, IonUtils, Ownable {
         return 9;
     }
 
-    function changeName(string memory newName) public onlyOwner {
+    function changeName(string memory newName) public {
+        require(msg.sender == multisig, ERROR_NOT_ALLOWED);
         _name = newName;
         emit NameChanged(newName, msg.sender);
     }
 
-    function changeSymbol(string memory newSymbol) public onlyOwner {
+    function changeSymbol(string memory newSymbol) public {
+        require(msg.sender == multisig, ERROR_NOT_ALLOWED);
         _symbol = newSymbol;
         emit SymbolChanged(newSymbol, msg.sender);
     }
