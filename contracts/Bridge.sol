@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.7.0;
+pragma solidity ^0.8.20;
 pragma experimental ABIEncoderV2;
 
 import "./BridgeInterface.sol";
@@ -12,7 +12,7 @@ contract Bridge is SignatureChecker, BridgeInterface, WrappedION {
     mapping(address => bool) public isOracle;
     mapping(bytes32 => bool) public finishedVotings;
 
-    constructor (string memory name_, string memory symbol_, address[] memory initialSet) ERC20(name_, symbol_) {
+    constructor (string memory name_, string memory symbol_, address[] memory initialSet) ERC20(name_, symbol_) ERC20Permit(name_) {
         updateOracleSet(0, initialSet);
     }
     
@@ -26,7 +26,7 @@ contract Bridge is SignatureChecker, BridgeInterface, WrappedION {
       for(uint i=0; i<signum; i++) {
         address signer = signatures[i].signer;
         require(isOracle[signer], "Unauthorized signer");
-        uint next_signer = uint(signer);
+        uint256 next_signer = uint256(uint160(signer));
         require(next_signer > last_signer, "Signatures are not sorted");
         last_signer = next_signer;
         checkSignature(digest, signatures[i]);

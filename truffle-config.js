@@ -4,7 +4,7 @@ const HDWalletProvider = require("@truffle/hdwallet-provider");
 module.exports = {
   compilers: {
     solc: {
-      version: '0.7.4',
+      version: '0.8.24',
       settings: {
         optimizer: {
           enabled: true,

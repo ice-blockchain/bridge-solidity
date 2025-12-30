@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.7.0;
+pragma solidity ^0.8.20;
 pragma experimental ABIEncoderV2;
 
-import "./ERC20.sol";
+import "./ERC20Permit.sol";
 import "./IonUtils.sol";
 
-abstract contract WrappedION is ERC20, IonUtils {
+abstract contract WrappedION is ERC20Permit, IonUtils {
     bool public allowBurn;
 
     address public constant multisig = 0xDFDe8108E14c70B6796bdd220454A80E849C7689;

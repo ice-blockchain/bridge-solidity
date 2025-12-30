@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/#readme",
   "dependencies": {
-    "@openzeppelin/contracts": "^4.0.0",
-    "@truffle/hdwallet-provider": "^2.1.15",
+    "@openzeppelin/contracts": "^5.4.0",
+    "@truffle/hdwallet-provider": "^1.7.0",
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
     "chai-shallow-deep-equal": "^1.4.6",
@@ -36,6 +36,6 @@
     "chai": "^4.3.4",
     "dotenv": "^8.6.0",
     "eth-gas-reporter": "^0.2.25",
-    "truffle": "^5.8.2"
+    "truffle": "^5.11.5"
   }
 }
